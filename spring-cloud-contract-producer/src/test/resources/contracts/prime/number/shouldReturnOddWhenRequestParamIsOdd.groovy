@@ -1,6 +1,6 @@
 package contracts.prime.number
 
-import org.springframework.cloud.contract.spec.Contract
+import org.springframework.cloud.contract.spec.*
 
 Contract.make {
     description "should return odd when number input is odd"
@@ -8,7 +8,7 @@ Contract.make {
         method GET()
         url("/validate/prime-number") {
             queryParameters {
-                parameter("number", "1")
+                parameter(["number": "1"])
             }
         }
     }

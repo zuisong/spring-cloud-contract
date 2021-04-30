@@ -1,13 +1,18 @@
 package com.baeldung.spring.cloud.springcloudcontractproducer.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EvenOddController {
+    @Autowired
+    Calculator calculator;
 
     @GetMapping("/validate/prime-number")
     public String isNumberPrime(@RequestParam("number") Integer number) {
-        return number % 2 == 0 ? "Even" : "Odd";
+        return calculator.isNumberPrime(number) ? "Even" : "Odd";
     }
 }
+

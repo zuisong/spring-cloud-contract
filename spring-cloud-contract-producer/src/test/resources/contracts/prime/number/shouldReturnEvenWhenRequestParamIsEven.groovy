@@ -8,7 +8,7 @@ Contract.make {
         method GET()
         url("/validate/prime-number") {
             queryParameters {
-                parameter("number", "2")
+                parameter(["number": "2"])
             }
         }
     }

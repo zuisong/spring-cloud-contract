@@ -6,7 +6,11 @@ import org.springframework.test.web.servlet.setup.*
 import spock.lang.*
 
 class PrimeNumberBase extends Specification {
-    private EvenOddController evenOddController = new EvenOddController()
+    Calculator calculator = Mock(Calculator) {
+        isNumberPrime(2) >> true
+        isNumberPrime(1) >> false
+    }
+    private EvenOddController evenOddController = new EvenOddController(calculator: calculator)
 
     def setup() {
         StandaloneMockMvcBuilder standaloneMockMvcBuilder =

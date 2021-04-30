@@ -1,6 +1,6 @@
 package contracts.prime.number
 
-import org.springframework.cloud.contract.spec.Contract
+import org.springframework.cloud.contract.spec.*
 
 Contract.make {
     description "should return even when number input is even"

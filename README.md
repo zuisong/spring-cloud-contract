@@ -9,5 +9,5 @@ This module contains articles about Spring Cloud Contract
 ---
 执行以下命令体验 spring contract
 > `./mvnw clean install -DskipTests`
-> 
+>
 > `./mvnw test`

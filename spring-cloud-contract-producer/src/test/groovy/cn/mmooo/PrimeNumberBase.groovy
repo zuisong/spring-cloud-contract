@@ -7,7 +7,7 @@ import spock.lang.*
 
 class PrimeNumberBase extends Specification {
     Calculator calculator = Mock(Calculator) {
-        isNumberPrime(_) >> { Integer num -> num % 2 == 0 }
+        isNumberPrime(_ as Integer) >> { Integer num -> num % 2 == 0 }
     }
     private EvenOddController evenOddController = new EvenOddController(calculator: calculator)
 

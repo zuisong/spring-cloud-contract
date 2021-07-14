@@ -1,0 +1,59 @@
+# These are the default stages.
+# You don't need to explicitly define them.
+# But you could define any stages you want.
+stages:
+  - test
+  - visualize
+  - deploy
+
+# This is the name of the job.
+# You can choose it freely.
+maven_test:
+  image: maven:3.6-openjdk-8-slim
+  # A job is always executed within a stage.
+  # If no stage is set, it defaults to 'test'.
+  stage: test
+  tags:
+    - docker
+  # Since we require Maven for this job,
+  # we can restrict the job to runners with a certain tag.
+  # Of course, it is our duty to actually configure a runner
+  # with the tag 'maven' and a working maven installation
+  # Here you can execute arbitrate terminal commands.
+  # If any of the commands returns a non zero exit code the job fails.
+  script:
+    - echo "Maven build started"
+    - mvn clean install -DskipTests
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report-aggregate -U
+  artifacts:
+    expire_in: 7 days
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
+        - ./*/target/surefire-reports/TEST-*.xml
+        - ./*/target/failsafe-reports/TEST-*.xml
+    paths:
+      - tests/target/site/jacoco-aggregate/
+coverage-jdk11:
+  stage: visualize
+  image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
+  tags:
+    - docker
+  script:
+    # convert report from jacoco to cobertura
+    - 'python /opt/cover2cover.py tests/target/site/jacoco-aggregate/jacoco.xml
+    spring-cloud-contract-consumer/src/main/java
+    spring-cloud-contract-producer/src/main/java
+     > cobertura.xml'
+    # read the <source></source> tag and prepend the path to every filename attribute
+    - 'python /opt/source2filename.py cobertura.xml'
+  dependencies:
+    - maven_test
+  artifacts:
+    expire_in: 7 days
+    reports:
+      cobertura: cobertura.xml
+    paths:
+      - cobertura.xml

@@ -4,3 +4,4 @@ target
 .*
 !.mvn
 !.github
+!.gitlab-ci.yml

@@ -1,6 +1,5 @@
 package com.baeldung.spring.cloud.springcloudcontractproducer.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

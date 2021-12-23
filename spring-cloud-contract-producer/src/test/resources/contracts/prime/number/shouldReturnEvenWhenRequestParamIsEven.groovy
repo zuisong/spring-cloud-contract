@@ -7,12 +7,15 @@ Contract.make {
     description "should return even when number input is even"
     request {
         method GET()
-        headers{
+        headers {
             contentType MediaTypes.APPLICATION_JSON
         }
         url("/validate/prime-number") {
+
             queryParameters {
-                parameter(["number": "2"])
+                [
+                        "number"    : "2",
+                ].forEach { k, v -> parameter(k, v) }
             }
         }
     }

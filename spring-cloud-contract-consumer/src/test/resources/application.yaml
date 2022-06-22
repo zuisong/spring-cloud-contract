@@ -1,0 +1,9 @@
+stubrunner:
+  ids:
+    # - [groupId]:artifactId:[version]:[classify]:[port]
+    - com.baeldung.spring.cloud:spring-cloud-contract-producer:+:stubs
+  ids-to-service-ids:
+    # 映射服务
+    spring-cloud-contract-producer: producer
+  # 该模式下会从远程maven仓库缓存到本地
+  stubs-mode: local

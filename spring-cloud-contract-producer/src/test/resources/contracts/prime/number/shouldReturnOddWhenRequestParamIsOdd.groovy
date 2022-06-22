@@ -3,6 +3,7 @@ package contracts.prime.number
 import org.springframework.cloud.contract.spec.*
 
 Contract.make {
+    priority(1)
     description "should return odd when number input is odd"
     request {
         method GET()

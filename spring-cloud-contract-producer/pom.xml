@@ -87,6 +87,7 @@
                 <configuration>
                     <packageWithBaseClasses>cn.mmooo</packageWithBaseClasses>
                     <testFramework>SPOCK</testFramework>
+                    <serverId>producer</serverId>
                 </configuration>
             </plugin>
         </plugins>

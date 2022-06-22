@@ -13,8 +13,7 @@ import spock.lang.*
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
-@AutoConfigureStubRunner(stubsMode = StubRunnerProperties.StubsMode.LOCAL,
-        ids = "com.baeldung.spring.cloud:spring-cloud-contract-producer:+:stubs:8090")
+@AutoConfigureStubRunner
 class BasicMathControllerIntegrationSpec extends Specification {
 
     @Autowired

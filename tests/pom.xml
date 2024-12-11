@@ -14,12 +14,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.baeldung.spring.cloud</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>spring-cloud-contract-consumer</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.baeldung.spring.cloud</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>spring-cloud-contract-producer</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,16 +1,22 @@
 package com.baeldung.spring.cloud.springcloudcontractconsumer.controller
 
-import io.restassured.http.*
-import io.restassured.module.mockmvc.*
-import org.springframework.beans.factory.annotation.*
-import org.springframework.boot.test.autoconfigure.json.*
-import org.springframework.boot.test.autoconfigure.web.servlet.*
-import org.springframework.boot.test.context.*
-import org.springframework.cloud.contract.stubrunner.spring.*
-import org.springframework.test.web.servlet.*
-import spock.lang.*
+import com.baeldung.spring.cloud.springcloudcontractconsumer.SpringCloudContractConsumerApplication
+import io.restassured.http.ContentType
+import io.restassured.module.mockmvc.RestAssuredMockMvc
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.MockMvcBuilder
+import spock.lang.Specification
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = SpringCloudContractConsumerApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
 @AutoConfigureStubRunner(stubsMode = StubRunnerProperties.StubsMode.LOCAL,
@@ -18,9 +24,14 @@ import spock.lang.*
 class BasicMathControllerIntegrationSpec extends Specification {
 
     @Autowired
+    private MockMvcBuilder mockMvcBuilder
+
+    @Autowired
     private MockMvc mockMvc
 
     def setup() {
+        println "Mock MVC"
+        Objects.requireNonNull(mockMvc)
         RestAssuredMockMvc.mockMvc(mockMvc)
     }
 
